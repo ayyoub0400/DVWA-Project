@@ -38,8 +38,9 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
               
-            - name: Snyk Test
-              uses: snyk/actions/node@master
+            - uses: snyk/actions/setup@master
+            - name: Snyk test
+              run: snyk test
               env:
                 SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               
