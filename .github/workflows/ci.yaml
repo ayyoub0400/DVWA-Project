@@ -61,7 +61,7 @@ jobs:
               with:
                 directory: 'juice-shop'
                 file: Dockerfile
-                framework: docker
+                framework: Dockerfile
     
 
                 
