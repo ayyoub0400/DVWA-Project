@@ -1,11 +1,9 @@
 Name: CI Build, Test and Push
 
 on:
-    pull_request:
+    push:
         branches:
-            - master
-        paths:
-            - 'juice-shop/**'
+            - main
 
 jobs:
     codeql-scan:
