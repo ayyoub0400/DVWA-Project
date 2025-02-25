@@ -9,6 +9,8 @@ jobs:
     codeql-scan:
         permissions:
             contents: read
+            security-events: write
+            pull-requests: read
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
