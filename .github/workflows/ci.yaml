@@ -1,0 +1,53 @@
+Name: CI Build, Test and Push
+
+on:
+    pull_request:
+        branches:
+            - master
+        paths:
+            - 'juice-shop/**'
+
+jobs:
+    codeql-scan:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v3
+              with:
+                languages: 'javascript'
+
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v3
+    
+    
+    snyk-check:
+        runs-on: ubuntu-latest
+        needs: codeql-scan
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Snyk Test
+              uses: snyk/actions/node@master
+              env:
+                SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    
+    checkov-scan:
+        needs: snyk-check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Checkov Scan
+              uses: bridgecrewio/checkov-action@master
+              with:
+                directory: 'juice-shop'
+                file: Dockerfile
+                framework: docker
+    
+
+                
