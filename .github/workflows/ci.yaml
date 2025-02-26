@@ -59,13 +59,15 @@ jobs:
               with:
                 dockerfile: app/Dockerfile
 
-    ecrpush:
+    ecrscanandpush:
       runs-on: ubuntu-latest
       needs: [codeql-scan, snyk-check, dockerlint]
       steps:
         - name: Checkout repository
           uses: actions/checkout@v4
 
+        
+      
         - name: Configure AWS Credentials
           uses: aws-actions/configure-aws-credentials@v4
           with:
@@ -77,12 +79,24 @@ jobs:
           id: login-ecr
           uses: aws-actions/amazon-ecr-login@v2
 
-        - name: Build, tag, and push the image to Amazon ECR
+        - name: Build, tag the image 
           id: build-image
           env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             ECR_REPOSITORY: ${{ vars.REPOSITORY }}
             IMAGE_TAG: latest
-          run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./app
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          run: docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./app
+
+        - name: Scan image
+          id: trivyscan
+          uses: aquasecurity/trivy-action@0.28.0
+          with:
+            image-ref: '$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG'
+            format: table
+            exit-code: 1
+            ignore-unfixed: true
+            vuln-type: os,library
+            severity: HIGH,CRITICAL
+        
+        - name: Push image to Amazon ECR
+          run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
