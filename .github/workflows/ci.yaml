@@ -44,7 +44,7 @@ jobs:
               uses: actions/cache@v4
               with:
                 path: /usr/local/lib/node_modules
-                key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
             
             - name: Install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
