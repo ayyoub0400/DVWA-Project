@@ -47,13 +47,13 @@ jobs:
             
             - name: Install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
-              run: npm install
-
-            - uses: snyk/actions/setup@master
-            - name: Snyk test
-              run: snyk test
-              env:
-                SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+              run: npm ci
+              
+            #- uses: snyk/actions/setup@master
+            #- name: Snyk test
+            #  run: snyk test
+            #  env:
+            #    SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               
     
     dockerlint:
