@@ -43,12 +43,12 @@ jobs:
               id: cache
               uses: actions/cache@v4
               with:
-                path: /usr/local/lib
+                path: ./app/node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
             
             - name: Install dependencies
               if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-              run: npm install
+              run: npm install --prefix ./app/node_modules
               
             - uses: snyk/actions/setup@master
             - name: Snyk test
