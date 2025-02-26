@@ -47,7 +47,7 @@ jobs:
                 key: ${{ runner.os }}-node
 
             - name: find packages
-              run: ls -a ~/.npm
+              run: npm list -g
             
             - name: Install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
