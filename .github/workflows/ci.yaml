@@ -48,7 +48,7 @@ jobs:
             
             - name: Install dependencies
               if: ${{ steps.cache.outputs.cache-hit != 'true' }}
-              run: npm install --prefix ./app/node_modules
+              run: npm install --prefix ./app/
               
             - uses: snyk/actions/setup@master
             - name: Snyk test
