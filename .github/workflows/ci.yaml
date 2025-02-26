@@ -58,19 +58,16 @@ jobs:
                 SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               
     
-    checkov-scan:
+    dockerlint:
         needs: snyk-check
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Checkov Scan
-              uses: bridgecrewio/checkov-action@master
+            - uses: hadolint/hadolint-action@v3.1.0
               with:
-                directory: 'juice-shop'
-                file: Dockerfile
-                framework: dockerfile
+                dockerfile: juice-shop/Dockerfile
 
     
 
