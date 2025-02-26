@@ -29,7 +29,6 @@ jobs:
     
     snyk-check:
         runs-on: ubuntu-latest
-        needs: codeql-scan
         continue-on-error: true
         defaults:
             run:
@@ -61,7 +60,6 @@ jobs:
               
     
     dockerlint:
-        needs: snyk-check
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
