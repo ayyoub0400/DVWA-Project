@@ -44,14 +44,14 @@ jobs:
               uses: actions/cache@v4
               with:
                 path: ./node_modules
-                key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+                key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
             
             - name: Install dependencies
-              if: steps.cache.outputs.cache-hit != true
+              if: steps.cache.outputs.cache-hit != 'true'
               run: |
-                mkdir -p ./node_modules
-                npm install --prefix ./node_modules package.json
-              
+                npm install
+                npm root -g
+
             - uses: snyk/actions/setup@master
             - name: Snyk test
               run: snyk test
