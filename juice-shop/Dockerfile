@@ -9,9 +9,9 @@ RUN npm i -g typescript ts-node \
     && chown -R 65532 logs \
     && chgrp -R 0 ftp/ frontend/dist/ logs/ data/ i18n/ \
     && chmod -R g=u ftp/ frontend/dist/ logs/ data/ i18n/ \
-    && rm data/chatbot/botDefaultTrainingData.json || true \
-    && rm ftp/legal.md || true \
-    && rm i18n/*.json || true
+    && if [ -f data/chatbot/botDefaultTrainingData.json ]; then rm data/chatbot/botDefaultTrainingData.json; fi \
+    && if [ -f ftp/legal.md ]; then rm ftp/legal.md; fi \
+    && rm i18n/*.json
 
 ARG CYCLONEDX_NPM_VERSION=latest
 RUN npm install -g @cyclonedx/cyclonedx-npm@$CYCLONEDX_NPM_VERSION
@@ -21,6 +21,7 @@ RUN npm run sbom
 FROM node:20-buster as libxmljs-builder
 WORKDIR /juice-shop
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential python3
+
 COPY --from=installer /juice-shop/node_modules ./node_modules
 RUN rm -rf node_modules/libxmljs/build && \
     cd node_modules/libxmljs && \
