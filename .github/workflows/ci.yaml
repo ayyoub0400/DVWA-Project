@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   lint:
-    uses: linter.yml
+    uses: ./.github/workflows/linter.yml
 
   sast:
     uses: ./.github/workflows/codescans.yml
