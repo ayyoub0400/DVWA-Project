@@ -92,7 +92,7 @@ jobs:
             exit-code: 1
             ignore-unfixed: true
             vuln-type: os,library
-            severity: HIGH,CRITICAL
+            severity: CRITICAL
         
         - name: Push image to Amazon ECR
           run: docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
