@@ -15,7 +15,8 @@
     "colors": "^1.4.0",
     "figlet": "^1.7.0",
     "node-cache": "^5.1.2",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "cross-spawn": "^7.0.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
