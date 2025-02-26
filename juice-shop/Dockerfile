@@ -14,8 +14,7 @@ RUN npm i -g typescript ts-node \
     && rm i18n/*.json
 
 ARG CYCLONEDX_NPM_VERSION=latest
-RUN npm install -g @cyclonedx/cyclonedx-npm@$CYCLONEDX_NPM_VERSION
-RUN npm run sbom
+RUN npm install -g @cyclonedx/cyclonedx-npm@$CYCLONEDX_NPM_VERSION && npm run sbom
 
 # workaround for libxmljs startup error
 FROM node:20-buster as libxmljs-builder
@@ -27,7 +26,7 @@ RUN rm -rf node_modules/libxmljs/build && \
     cd node_modules/libxmljs && \
     npm run build
 
-FROM gcr.io/distroless/nodejs20-debian11:latest
+FROM gcr.io/distroless/nodejs20-debian11:sha256:d8c6b75f5605d8f76369527e02540602f9c5d018745d13b47f0789d2d0074213
 ARG BUILD_DATE
 ARG VCS_REF
 LABEL maintainer="Bjoern Kimminich <bjoern.kimminich@owasp.org>" \
