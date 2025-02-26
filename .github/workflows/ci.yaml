@@ -50,7 +50,7 @@ jobs:
               if: steps.cache.outputs.cache-hit != 'true'
               run: |
                 echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
-                npm --prefix ./node_modules install ./package.json
+                npm --prefix ./node_modules install
 
                 
 
