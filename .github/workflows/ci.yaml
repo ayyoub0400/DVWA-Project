@@ -44,8 +44,10 @@ jobs:
               uses: actions/cache@v4
               with:
                 path: ~/.npm
-                key: ${{ runner.os }}-node-${{ hashFiles('./juice-shop/package.json') }}
+                key: ${{ runner.os }}-node
 
+            - name: find packages
+              run: ls -a ~/.npm
             
             - name: Install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
