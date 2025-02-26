@@ -48,7 +48,9 @@ jobs:
             
             - name: Install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
-              run: npm install
+              run: |
+                echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
+                npm install
                 
 
             - uses: snyk/actions/setup@master
