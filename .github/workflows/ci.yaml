@@ -39,20 +39,8 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: cache dependencies
-              id: cache
-              uses: actions/cache@v4
-              with:
-                path: ./node_modules
-                key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
-            
-            - name: Install dependencies
-              if: steps.cache.outputs.cache-hit != 'true'
-              run: |
-                echo "Cache hit: ${{ steps.cache.outputs.cache-hit }}"
-                npm --prefix ./node_modules install
-
-                
+            - name: NPM install
+              run: npm install
 
             - uses: snyk/actions/setup@master
             - name: Snyk test
