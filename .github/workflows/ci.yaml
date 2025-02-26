@@ -1,5 +1,5 @@
 name: CI Build, Test, Scan and Push
-
+#test
 on:
     push:
         branches:
@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   lint:
-    uses: ./.github/workflows/linter.yml
+    uses: linter.yml
 
   sast:
     uses: ./.github/workflows/codescans.yml
