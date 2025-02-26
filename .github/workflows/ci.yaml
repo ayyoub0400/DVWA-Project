@@ -81,17 +81,13 @@ jobs:
 
         - name: Build, tag the image 
           id: build-image
-          env:
-            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            ECR_REPOSITORY: ${{ vars.REPOSITORY }}
-            IMAGE_TAG: latest
-          run: docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./app
+          run: docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ vars.REPOSITORY }}:latest ./app
 
         - name: Scan image
           id: trivyscan
           uses: aquasecurity/trivy-action@0.28.0
           with:
-            image-ref: '$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG'
+            image-ref: ${{ steps.login-ecr.outputs.registry }}/${{ vars.REPOSITORY }}:latest
             format: table
             exit-code: 1
             ignore-unfixed: true
