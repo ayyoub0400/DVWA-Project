@@ -46,6 +46,6 @@ jobs:
             - name: Validate TF code
               run: terraform validate
               
-            - name: Plan terraform
-              run: terraform plan 
+            - name: Provision TF infra
+              run: terraform apply --auto-approve
 
