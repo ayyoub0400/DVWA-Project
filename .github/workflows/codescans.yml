@@ -1,4 +1,4 @@
-name: reusable code scans
+name: Code Security Scans
 
 on:
     workflow_call:

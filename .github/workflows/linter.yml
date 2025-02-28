@@ -1,4 +1,4 @@
-name: code linter
+name: Code Linter
 
 on:
     workflow_call:

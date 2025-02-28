@@ -1,4 +1,4 @@
-name: Deploy to Test
+name: Deploy to Prod
 
 on:
     workflow_call:
@@ -14,11 +14,11 @@ on:
 jobs:
     testdeploy:
         environment:
-            test
+            production
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: terraform/environments/test
+                working-directory: terraform/environments/prod
         steps:
             - name: Checkout code
               uses: actions/checkout@v4

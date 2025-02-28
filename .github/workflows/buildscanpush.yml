@@ -1,4 +1,4 @@
-name: buildscanpush
+name: Build, Scan & Push Image
 
 on:
     workflow_call:

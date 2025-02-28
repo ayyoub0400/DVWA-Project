@@ -1,4 +1,4 @@
-name: destroy resources
+name: Deprovision AWS Resources
 
 on:
     workflow_dispatch:
