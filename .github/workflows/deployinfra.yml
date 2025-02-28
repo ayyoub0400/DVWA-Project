@@ -1,0 +1,31 @@
+name: Deploy Infrastructure
+
+on:
+    workflow_dispatch:
+        inputs:
+            confirmenv:
+                description: "Which env to deploy -- 'prod'/'test'"
+                required: true
+                default: ""
+                type: string
+
+concurrency:
+    group: terraform-actions
+    cancel-in-progress: false
+
+jobs:
+    pushtotest:
+        if: ${{ github.event.inputs.confirmenv == 'test' }}
+        uses: ./.github/workflows/pushtotest.yml
+        secrets:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION: ${{ secrets.AWS_REGION }}
+
+    pushtoprod:
+        if: ${{ github.event.inputs.confirmenv == 'prod' }}
+        uses: ./.github/workflows/pushtoprod.yml
+        secrets:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION: ${{ secrets.AWS_REGION }}

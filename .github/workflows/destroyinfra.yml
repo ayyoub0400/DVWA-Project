@@ -12,7 +12,7 @@ on:
 
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
+    group: terraform-actions
     cancel-in-progress: false
 
 jobs:
