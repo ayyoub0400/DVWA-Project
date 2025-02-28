@@ -10,11 +10,13 @@ on:
                 type: choice
                 options:
                     - test
-                    - prod
+                    - production
             
 
 jobs:
     testjob:
+        environment:
+            production
         runs-on: ubuntu-latest
         steps:
             - name: helloworld
