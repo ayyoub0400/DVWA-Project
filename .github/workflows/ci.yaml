@@ -31,9 +31,17 @@ jobs:
   ecrpush:
     needs: [lint, sast]
     uses: ./.github/workflows/buildscanpush.yml
-    if: ${{ github.event_name == 'pull' || github.event_name == 'push' }} && github.event.action == 'closed'
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
+
+  pushtotest:
+    needs: ecrpush
+    if: ${{ github.event_name == 'pull' || github.event_name == 'push' }} && github.event.action == 'closed'
+    uses: ./.github/workflows/pushtotest.yml
+  
+      
+    
+    
 
