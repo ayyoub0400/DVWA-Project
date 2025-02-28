@@ -10,6 +10,10 @@ on:
             AWS_REGION:
                 required: true
             
+
+concurrency:
+    group: terraform-actions
+    cancel-in-progress: false
             
 jobs:
     testdeploy:
