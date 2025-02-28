@@ -1,13 +1,6 @@
 name: CI Build, Test, Scan and Push
 #test
 on:
-    push:
-        branches:
-            - main
-        paths:
-            - 'app/**'
-            - '.github/workflows/ci.yaml'
-
     pull_request:
         branches:
             - main
