@@ -7,10 +7,10 @@ terraform {
     }
 
     backend "s3" {
-        bucket         = "my-terraform-state-bucket"
+        bucket         = "tfstate-backend-aym-2025"
         key            = "env:/test/terraform.tfstate"
         region         = "us-east-1"
-        dynamodb_table = "terraform-lock-table"
+        use_lockfile = "terraform-lock-table"
         encrypt        = true
 }
 }
