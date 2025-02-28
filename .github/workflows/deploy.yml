@@ -1,0 +1,21 @@
+name: deploy to test/prod
+
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: "Which environment to deploy to"
+                required: true
+                default: "test"
+                type: choice
+                options:
+                    - test
+                    - prod
+            
+
+jobs:
+    testjob:
+        runs-on: ubuntu-latest
+        steps:
+            - name: helloworld
+              run: echo "helloworld"
