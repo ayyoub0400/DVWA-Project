@@ -16,7 +16,7 @@ concurrency:
     cancel-in-progress: false
     
 jobs:
-    testdeploy:
+    proddeploy:
         environment:
             production
         runs-on: ubuntu-latest
@@ -47,5 +47,9 @@ jobs:
               run: terraform validate
               
             - name: Apply terraform
-              run: terraform apply --auto-approve 
+              run: |
+                terraform apply --auto-approve 
+                echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
+        outputs:
+            alb_dns: ${{ steps.proddeploy.outputs.ALB_DNS }}
 
