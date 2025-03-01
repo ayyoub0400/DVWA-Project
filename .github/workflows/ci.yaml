@@ -59,7 +59,13 @@ jobs:
           name: alb_dns_artifact
           path: .
       
-      - name: echo variable
-        run: cat alb_dns.txt
+      - name: text to var
+        run: website=$(cat alb_dns.txt) 
+
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.12.0
+        with:
+          target: website
+
 
 
