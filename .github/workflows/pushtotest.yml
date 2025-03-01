@@ -55,4 +55,6 @@ jobs:
               run: |
                 alb_dns=$(terraform output -raw alb_dns)
                 echo "alb_dns=$alb_dns" >> $GITHUB_OUTPUT
-                
+              
+            - name: echo1
+              run: echo ${{ steps.tfoutput.outputs.alb_dns }}
