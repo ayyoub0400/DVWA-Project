@@ -36,6 +36,6 @@ module "ecs" {
     security_group_id = module.vpc.security_group_id
     }
 
-output "dnsname" {
+output "alb_dns" {
   value = module.ecs.alb_dns
 }
