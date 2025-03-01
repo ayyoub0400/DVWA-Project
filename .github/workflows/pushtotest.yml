@@ -2,6 +2,9 @@ name: Deploy to Test
 
 on:
     workflow_call:
+        outputs:
+            alb_dns:
+                value: ${{ jobs.tfoutput.outputs.alb_dns }}
         secrets:
             AWS_ACCESS_KEY_ID:
                 required: true
@@ -9,7 +12,7 @@ on:
                 required: true
             AWS_REGION:
                 required: true
-
+        
 concurrency:
     group: terraform-actions
     cancel-in-progress: false
@@ -22,8 +25,6 @@ jobs:
         defaults:
             run:
                 working-directory: terraform/environments/test
-        outputs:
-            alb_dns: ${{ steps.tfoutput.outputs.alb_dns }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
