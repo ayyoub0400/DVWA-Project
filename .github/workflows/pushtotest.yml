@@ -55,6 +55,7 @@ jobs:
               id: tfoutput
               run: |
                 alb_dns=$(terraform output -raw alb_dns)
+                echo "alb_dns=$alb_dns"
                 echo "$alb_dns" > alb_dns.txt
             
             - name: upload artifact
