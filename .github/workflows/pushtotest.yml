@@ -23,7 +23,7 @@ jobs:
             run:
                 working-directory: terraform/environments/test
         outputs:
-            alb_dns: ${{ steps.tfoutput.outputs.ALB_DNS }}
+            alb_dns: ${{ steps.tfoutput.outputs.alb_dns }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -54,4 +54,4 @@ jobs:
               id: tfoutput
               run: |
                 echo "alb_dns=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
-                echo "$alb_dns"
+                echo $alb_dns
