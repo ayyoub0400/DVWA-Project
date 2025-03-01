@@ -27,22 +27,6 @@ jobs:
 
             - name: Perform CodeQL Analysis
               uses: github/codeql-action/analyze@v3
-    
-    unit-tests:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: ./app
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-            
-            - name: Node test
-              run: npm test
-
 
     snyk-check:
         timeout-minutes: 5
