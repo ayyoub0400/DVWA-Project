@@ -61,7 +61,7 @@ jobs:
       
       - name: text to var
         id: conversion
-        run: echo "website=$(cat alb_dns.txt) >> $GITHUB_OUTPUT
+        run: echo "website=$(cat alb_dns.txt)" >> $GITHUB_OUTPUT
 
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.12.0
