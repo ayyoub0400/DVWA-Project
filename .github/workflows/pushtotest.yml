@@ -23,6 +23,8 @@ jobs:
         defaults:
             run:
                 working-directory: terraform/environments/test
+        outputs:
+            alb_dns: ${{ steps.terraform.outputs.ALB_DNS }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -51,6 +53,5 @@ jobs:
               run: |
                 terraform apply --auto-approve
                 echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
-        outputs:
-            alb_dns: ${{ steps.terraform.outputs.ALB_DNS }}
+        
                         
