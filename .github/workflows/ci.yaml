@@ -1,5 +1,5 @@
 name: CI Build, Test, Scan and Push
-#TESTeee
+#TESTeeeasdds
 on:
     push:
         branches:
@@ -55,7 +55,7 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.12.0
         with:
-          target: "${{ steps.pushtotest.outputs.alb_dns }}:3000"
+          target: "${{ needs.pushtotest.outputs.alb_dns }}:3000"
       
     
     

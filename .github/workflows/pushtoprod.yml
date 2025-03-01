@@ -50,6 +50,5 @@ jobs:
               run: |
                 terraform apply --auto-approve 
                 echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
-        outputs:
-            alb_dns: ${{ steps.proddeploy.outputs.ALB_DNS }}
+
 
