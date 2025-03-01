@@ -53,6 +53,6 @@ jobs:
             - name: tfoutput
               id: tfoutput
               run: |
-                terraform output -raw alb_dns
-                echo "alb_dns=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
+                alb_dns=$(terraform output -raw alb_dns)
+                echo "alb_dns=$alb_dns" >> $GITHUB_OUTPUT
                 
