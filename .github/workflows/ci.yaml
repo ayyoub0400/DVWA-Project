@@ -1,5 +1,5 @@
 name: CI Build, Test, Scan and Push
-#TESTeeeasddsASDSDASD
+#TESTeeeasddsASDSDASDasds
 on:
     push:
         branches:
@@ -44,7 +44,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
-  
+
   dastscan:
     needs: pushtotest
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.12.0
         with:
-          target: "${{ needs.pushtotest.outputs.alb_dns }}:3000"
+          target: "${{ needs.pushtotest.outputs.ALB_DNS }}:3000"
       
     
     
