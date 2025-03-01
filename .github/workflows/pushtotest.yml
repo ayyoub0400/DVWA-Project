@@ -24,7 +24,7 @@ jobs:
             run:
                 working-directory: terraform/environments/test
         outputs:
-            alb_dns: ${{ steps.terraform.outputs.ALB_DNS }}
+            alb_dns: ${{ steps.tfoutput.outputs.ALB_DNS }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -49,9 +49,9 @@ jobs:
               run: terraform validate
               
             - name: Provision TF infra
-              id: terraform
-              run: |
-                terraform apply --auto-approve
-                echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
+              run: terraform apply --auto-approve
         
-                        
+            - name: tfoutput
+              id: tfoutput
+              run: echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
+     
