@@ -54,13 +54,11 @@ jobs:
             - name: tfoutput
               id: tfoutput
               run: |
-                alb_dns=$(terraform output -raw alb_dns)
-                echo "alb_dns=$alb_dns"
-                echo "$alb_dns" > alb_dns.txt
+                terraform output -raw alb_dns > /tmp/alb_dns.txt
             
             - name: upload artifact
               uses: actions/upload-artifact@v4
               with:
                 name: alb_dns_artifact
-                path: alb_dns.txt
+                path: /tmp/alb_dns.txt
             
