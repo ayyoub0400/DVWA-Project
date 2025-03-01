@@ -61,11 +61,9 @@ jobs:
       
       - name: echo variable
         run: |
-          alb_dns=$(cat alb_dns.txt)
-          echo "alb_dns=$alb_dns" >> $GITHUB_ENV
-          echo ${{ env.alb_dns }}
-
+          alb_dns=$(cat /tmp/alb_dns.txt)
       
-    
+      - name: echo new
+        run: echo $alb_dns
     
 
