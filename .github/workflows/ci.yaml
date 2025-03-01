@@ -60,12 +60,13 @@ jobs:
           path: .
       
       - name: text to var
-        run: website=$(cat alb_dns.txt) >> $GITHUB_ENV
+        id: conversion
+        run: website=$(cat alb_dns.txt) >> $GITHUB_OUTPUT
 
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.12.0
         with:
-          target: ${{ env.website }}
+          target: ${{ steps.conversion.outputs.website }}
 
 
 
