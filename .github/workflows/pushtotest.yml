@@ -55,7 +55,7 @@ jobs:
               id: tfoutput
               run: |
                 terraform output -raw alb_dns > /tmp/alb_dns.txt
-            
+                cat /tmp/alb_dns.txt
             - name: upload artifact
               uses: actions/upload-artifact@v4
               with:

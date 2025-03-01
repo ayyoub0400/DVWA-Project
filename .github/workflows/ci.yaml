@@ -60,10 +60,6 @@ jobs:
           path: .
       
       - name: echo variable
-        run: |
-          alb_dns=$(cat /tmp/alb_dns.txt)
-      
-      - name: echo new
-        run: echo $alb_dns
-    
+        run: cat alb_dns.txt
+
 
