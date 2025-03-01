@@ -9,7 +9,6 @@ on:
                 required: true
             AWS_REGION:
                 required: true
-            
 
 concurrency:
     group: terraform-actions
@@ -53,5 +52,5 @@ jobs:
         
             - name: tfoutput
               id: tfoutput
-              run: echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
+              run: echo "alb_dns=$(terraform output -raw alb_dns)" >> $GITHUB_OUTPUT
      
